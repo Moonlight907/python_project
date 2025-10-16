@@ -97,25 +97,117 @@ for country in data_2022:
             min_bcg_2022_value = value
             min_bcg_2022_country = country
 
-# Выводим результаты
+# Выводим результаты по иммунизации
+print(f"\n=== ИММУНИЗАЦИЯ БЦЖ ===")
 print(f"Максимум по иммунизации BCG за 2021 год: {max_bcg_2021_country} с значением {max_bcg_2021_value}")
 print(f"Минимум по иммунизации BCG за 2021 год: {min_bcg_2021_country} с значением {min_bcg_2021_value}")
-
 print(f"Максимум по иммунизации BCG за 2022 год: {max_bcg_2022_country} с значением {max_bcg_2022_value}")
 print(f"Минимум по иммунизации BCG за 2022 год: {min_bcg_2022_country} с значением {min_bcg_2022_value}")
 
-# Выводим результаты по максимальному и минимальному значению по иммунизации
-print(
-    f"\nМаксимум по иммунизации BCG за 2021 год: {max_bcg_2021_country} с значением {data_2021[max_bcg_2021_country].get('Immunization, BCG (% of one-year-old children)', 0)}")
-print(
-    f"Минимум по иммунизации BCG за 2021 год: {min_bcg_2021_country} с значением {data_2021[min_bcg_2021_country].get('Immunization, BCG (% of one-year-old children)', 0)}")
+print(f"\n=== ЗАБОЛЕВАЕМОСТЬ ТУБЕРКУЛЕЗОМ ===")
 
-print(
-    f"\nМаксимум по иммунизации BCG за 2022 год: {max_bcg_2022_country} с значением {data_2022[max_bcg_2022_country].get('Immunization, BCG (% of one-year-old children)', 0)}")
-print(
-    f"Минимум по иммунизации BCG за 2022 год: {min_bcg_2022_country} с значением {data_2022[min_bcg_2022_country].get('Immunization, BCG (% of one-year-old children)', 0)}")
+# Для 2021 года
+max_incidence_2021_value = -1
+min_incidence_2021_value = float('inf')
+max_incidence_2021_country = ""
+min_incidence_2021_country = ""
 
-# Рейтинг по смертности от туберкулеза
+for country in data_2021:
+    value = data_2021[country].get("Incidence of tuberculosis (per 100,000 people)", None)
+    if value:
+        value = float(value)
+        if value > max_incidence_2021_value:
+            max_incidence_2021_value = value
+            max_incidence_2021_country = country
+        if value < min_incidence_2021_value:
+            min_incidence_2021_value = value
+            min_incidence_2021_country = country
+
+print(f"Максимум заболеваемости за 2021 год: {max_incidence_2021_country} с значением {max_incidence_2021_value}")
+print(f"Минимум заболеваемости за 2021 год: {min_incidence_2021_country} с значением {min_incidence_2021_value}")
+
+# Для 2022 года
+max_incidence_2022_value = -1
+min_incidence_2022_value = float('inf')
+max_incidence_2022_country = ""
+min_incidence_2022_country = ""
+
+for country in data_2022:
+    value = data_2022[country].get("Incidence of tuberculosis (per 100,000 people)", None)
+    if value:
+        value = float(value)
+        if value > max_incidence_2022_value:
+            max_incidence_2022_value = value
+            max_incidence_2022_country = country
+        if value < min_incidence_2022_value:
+            min_incidence_2022_value = value
+            min_incidence_2022_country = country
+
+print(f"Максимум заболеваемости за 2022 год: {max_incidence_2022_country} с значением {max_incidence_2022_value}")
+print(f"Минимум заболеваемости за 2022 год: {min_incidence_2022_country} с значением {min_incidence_2022_value}")
+
+print(f"\n=== СМЕРТНОСТЬ ОТ ТУБЕРКУЛЕЗА ===")
+
+# Для 2021 года
+max_death_2021_value = -1
+min_death_2021_value = float('inf')
+max_death_2021_country = ""
+min_death_2021_country = ""
+
+for country in data_2021:
+    value = data_2021[country].get("Tuberculosis death rate (per 100,000 people)", None)
+    if value:
+        value = float(value)
+        if value > max_death_2021_value:
+            max_death_2021_value = value
+            max_death_2021_country = country
+        if value < min_death_2021_value:
+            min_death_2021_value = value
+            min_death_2021_country = country
+
+print(f"Максимум смертности за 2021 год: {max_death_2021_country} с значением {max_death_2021_value}")
+print(f"Минимум смертности за 2021 год: {min_death_2021_country} с значением {min_death_2021_value}")
+
+# Для 2022 года
+max_death_2022_value = -1
+min_death_2022_value = float('inf')
+max_death_2022_country = ""
+min_death_2022_country = ""
+
+for country in data_2022:
+    value = data_2022[country].get("Tuberculosis death rate (per 100,000 people)", None)
+    if value:
+        value = float(value)
+        if value > max_death_2022_value:
+            max_death_2022_value = value
+            max_death_2022_country = country
+        if value < min_death_2022_value:
+            min_death_2022_value = value
+            min_death_2022_country = country
+
+print(f"Максимум смертности за 2022 год: {max_death_2022_country} с значением {max_death_2022_value}")
+print(f"Минимум смертности за 2022 год: {min_death_2022_country} с значением {min_death_2022_value}")
+
+# Сортируем данные по заболеваемости туберкулезом за 2021 год
+data_2021_incidence = {country: float(data_2021[country].get("Incidence of tuberculosis (per 100,000 people)", 0))
+                       for country in data_2021}
+sorted_2021_incidence = sorted(data_2021_incidence.items(), key=lambda x: x[1], reverse=True)
+
+# Сортируем данные по заболеваемости туберкулезом за 2022 год
+data_2022_incidence = {country: float(data_2022[country].get("Incidence of tuberculosis (per 100,000 people)", 0))
+                       for country in data_2022}
+sorted_2022_incidence = sorted(data_2022_incidence.items(), key=lambda x: x[1], reverse=True)
+
+# Выводим рейтинг по заболеваемости за 2021 год
+print("\n=== РЕЙТИНГ ПО ЗАБОЛЕВАЕМОСТИ ТУБЕРКУЛЕЗОМ ===")
+print("\nРейтинг по заболеваемости туберкулеза за 2021 год:")
+for rank, (country, incidence_rate) in enumerate(sorted_2021_incidence, 1):
+    print(f"{rank}. {country}: {incidence_rate} случаев на 100,000 людей")
+
+# Выводим рейтинг по заболеваемости за 2022 год
+print("\nРейтинг по заболеваемости туберкулеза за 2022 год:")
+for rank, (country, incidence_rate) in enumerate(sorted_2022_incidence, 1):
+    print(f"{rank}. {country}: {incidence_rate} случаев на 100,000 людей")
 
 # Сортируем данные по смертности от туберкулеза за 2021 год
 data_2021_death_rate = {country: float(data_2021[country].get("Tuberculosis death rate (per 100,000 people)", 0))
@@ -128,6 +220,7 @@ data_2022_death_rate = {country: float(data_2022[country].get("Tuberculosis deat
 sorted_2022_death_rate = sorted(data_2022_death_rate.items(), key=lambda x: x[1], reverse=True)
 
 # Выводим рейтинг по смертности за 2021 год
+print("\n=== РЕЙТИНГ ПО СМЕРТНОСТИ ОТ ТУБЕРКУЛЕЗА ===")
 print("\nРейтинг по смертности от туберкулеза за 2021 год:")
 for rank, (country, death_rate) in enumerate(sorted_2021_death_rate, 1):
     print(f"{rank}. {country}: {death_rate} случаев на 100,000 людей")
@@ -136,6 +229,8 @@ for rank, (country, death_rate) in enumerate(sorted_2021_death_rate, 1):
 print("\nРейтинг по смертности от туберкулеза за 2022 год:")
 for rank, (country, death_rate) in enumerate(sorted_2022_death_rate, 1):
     print(f"{rank}. {country}: {death_rate} случаев на 100,000 людей")
+
+print("\n=== ИЗМЕНЕНИЯ ПОКАЗАТЕЛЕЙ (2021 → 2022) ===")
 
 # Расчет средних значений по обнаружению случаев туберкулеза
 print("\n" + "="*60)
@@ -174,6 +269,28 @@ if detection_2022_values:
     print(f"Среднее значение за 2022 год: {avg_2022:.1f}%")
 else:
     print("Нет данных по обнаружению случаев туберкулеза за 2022 год")
+
+# Анализ изменений по заболеваемости
+print("\nИзменения заболеваемости туберкулезом:")
+for country in data_2021:
+    if country in data_2022:
+        incidence_2021 = data_2021[country].get("Incidence of tuberculosis (per 100,000 people)")
+        incidence_2022 = data_2022[country].get("Incidence of tuberculosis (per 100,000 people)")
+        if incidence_2021 and incidence_2022:
+            change = float(incidence_2022) - float(incidence_2021)
+            trend = "↑ увеличение" if change > 0 else "↓ снижение" if change < 0 else "→ без изменений"
+            print(f"{country}: {incidence_2021} → {incidence_2022} ({trend}, изменение: {change:+.1f})")
+
+# Анализ изменений по смертности
+print("\nИзменения смертности от туберкулеза:")
+for country in data_2021:
+    if country in data_2022:
+        death_2021 = data_2021[country].get("Tuberculosis death rate (per 100,000 people)")
+        death_2022 = data_2022[country].get("Tuberculosis death rate (per 100,000 people)")
+        if death_2021 and death_2022:
+            change = float(death_2022) - float(death_2021)
+            trend = "↑ увеличение" if change > 0 else "↓ снижение" if change < 0 else "→ без изменений"
+            print(f"{country}: {death_2021} → {death_2022} ({trend}, изменение: {change:+.2f})")
 
 # Анализ изменений по успешности лечения
 print("\n" + "="*60)
