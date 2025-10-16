@@ -26,12 +26,12 @@ with open(file_path, mode='r', encoding='utf-8') as file:
             value_2022 = row[3].strip()
 
             # Проверяем, что данные не пустые или некорректные
-            if value_2021 not in ['SAS', '..']:  # Пропускаем ненужные данные
+            if value_2021 not in ['..']:  # Пропускаем ненужные данные
                 if country not in data_2021:
                     data_2021[country] = {}
                 data_2021[country][row[0]] = value_2021  # Добавляем показатель и его значение
 
-            if value_2022 not in ['SAS', '..']:  # Пропускаем ненужные данные
+            if value_2022 not in ['..']:  # Пропускаем ненужные данные
                 if country not in data_2022:
                     data_2022[country] = {}
                 data_2022[country][row[0]] = value_2022  # Добавляем показатель и его значение
